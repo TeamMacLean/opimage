@@ -17,16 +17,10 @@ matrix:
       env: DEPS="numpy=1.9 scipy=0.16 matplotlib=1.4 pandas=0.16 scikit-image=0.11 python-dateutil"
 
 install:
-  # See:
-  # https://groups.google.com/a/continuum.io/forum/#!topic/conda/RSFENqovnro
-  # - conda update --yes --no-deps conda
-  # OK, this used to *fix* the build, but now it *breaks* the build.
-  # If you're reading this, good luck out there. I'm not sure what to tell you.
   - conda update --yes conda
   - conda config --add channels soft-matter
   - conda create -n testenv --yes $DEPS pip nose setuptools python=$TRAVIS_PYTHON_VERSION
   - source activate testenv
-  # for debugging...
   - echo $PATH
   - which python
   - conda info
