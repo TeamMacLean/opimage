@@ -286,20 +286,20 @@ def estimateMotion(dirname=None):
             vy = np.zeros(size(Vy, 1), size_(Vy, 2))
             Vx2 = Vx[:, :, k:k + taps - 1]
             Vy2 = Vy[:, :, k:k + taps - 1]
-            for j in np.arange(0, length_(blur)).reshape(-1):
+            for j in np.arange(0, len(blur)).reshape(-1):
                 vx = vx + blur[j] * Vx2[:, :, j]
                 vy = vy + blur[j] * Vy2[:, :, j]
             imagesc_(f[k + floor_(taps / 2)].orig)
-            axis_(char('image'), char('off'))
+            axis(char('image'), char('off'))
             colormap_(char('gray'))
             xramp, yramp = meshgrid_([np.arange(0, xdim, s)], [np.arange(0, ydim, s)], nargout=2)
-            hold_(char('on'))
+            hold(char('on'))
             ind = find_(vx == 0 and vy == 0)
             xramp[ind] = 0
             yramp[ind] = 0
             h = quiver_(xramp, yramp, 20 * vx, 20 * vy, 0)
             set_(h, char('Color'), char('r'), char('LineWidth'), 1)
-            hold_(char('off'))
+            hold(char('off'))
             drawnow
     c = 1
     for k in np.arange(0, N - taps).reshape(-1):
@@ -307,7 +307,7 @@ def estimateMotion(dirname=None):
         vy = zeros_(size_(Vy, 1), size_(Vy, 2))
         Vx2 = Vx[:, :, k:k + taps - 1]
         Vy2 = Vy[:, :, k:k + taps - 1]
-        for j in np.arange(0, length_(blur)).reshape(-1):
+        for j in np.arange(0, len(blur)).reshape(-1):
             vx = vx + blur[j] * Vx2[:, :, j]
             vy = vy + blur[j] * Vy2[:, :, j]
         indx = find_(abs_(vx) > eps)
@@ -328,7 +328,7 @@ def evaluateModel_(model=None, N=None):
 
 
 def modelFitAll_():
-    d = dir_(char('../output/*.csv'))
+    d = dir(char('../output/*.csv'))
     for k in np.arange(0, numel(d)).reshape(-1):
         fn = np.array([char('../output/'), d[k].name])
         dat = csvread_(fn)
@@ -336,12 +336,12 @@ def modelFitAll_():
         dat[isnan_(dat)] = 0
         dat = dat - mean_(dat)
         dat = detrend_(dat)
-        N = length_(dat)
+        N = len(dat)
         D = fftshift_(fft_(dat))
-        if (mod_(length_(dat), 2) == 0):
-            mid = length_(dat) / 2 + 1
+        if (mod(len(dat), 2) == 0):
+            mid = len(dat) / 2 + 1
         else:
-            mid = floor_(length_(dat) / 2) + 1
+            mid = floor_(len(dat) / 2) + 1
         D = D[mid:mid + 10]
         val, ind = max_(abs_(D), nargout=2)
         freq = ind - 1
@@ -354,16 +354,16 @@ def modelFitAll_():
         fclose_(fdout)
         fnout = strrep_(fn, char('.csv'), char('_model.png'))
         f = evaluateModel_(model, N)
-        plot_(dat, char('b'))
-        hold_(char('on'))
-        plot_(f, char('r'))
-        axis_([0, N - 1, min_(dat), max_(dat)])
-        legend_(char('data'), char('model'))
+        plot(dat, char('b'))
+        hold(char('on'))
+        plot(f, char('r'))
+        axis([0, N - 1, min_(dat), max_(dat)])
+        legend(char('data'), char('model'))
         title_(sprintf_(char('frequency = %f'), model[1]))
-        hold_(char('off'))
+        hold(char('off'))
         drawnow
         FRAME = getframe_(gcf)
-        imwrite_(uint8_(frame2im_(FRAME)), fnout)
+        imwrite(uint8_(frame2im_(FRAME)), fnout)
     return
 
 
@@ -386,22 +386,22 @@ def estimateAll():
             finally:
                 pass
             fd = safeOpenFle("%s/%s.csv" % (outdirname, d[k].name))
-            # for j in np.arange(0, length_(motion_y)).reshape(-1):
+            # for j in np.arange(0, len(motion_y)).reshape(-1):
             #     fprintf_(fd, char('%f\\n'), motion_y[j])
             # fclose_(fd)
             # figure_(1)
             # cla
-            # hold_(char('on'))
-            # plot_(motion_y, char('k'))
-            # hold_(char('off'))
-            # legend_(char('vertical'))
+            # hold(char('on'))
+            # plot(motion_y, char('k'))
+            # hold(char('off'))
+            # legend(char('vertical'))
             # xlabel_(char('frame'))
             # ylabel_(char('motion (pixels/frame)'))
             # title_(d[k].name)
             # box_(char('on'))
-            # axis_(char('tight'))
+            # axis(char('tight'))
             # FRAME = getframe_(gcf)
-            # imwrite_(uint8_(frame2im_(FRAME)), sprintf_(char('%s/%s.png'), outdirname, d[k].name))
+            # imwrite(uint8_(frame2im_(FRAME)), sprintf_(char('%s/%s.png'), outdirname, d[k].name))
     return
 
 
