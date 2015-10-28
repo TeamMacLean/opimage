@@ -5,6 +5,7 @@ import datetime
 import dateutil
 import matplotlib.pyplot as plt
 import csv
+import json
 
 def get_image_stack(img_dir):
     '''returns an array of full paths for image files in the img_dir'''
@@ -69,3 +70,13 @@ def box_to_string(tple):
     '''get corners of box as string'''
     print tple
     return ":".join([str(tple[0].start), str(tple[0].stop) ,str(tple[1].start), str(tple[1].stop) ] )
+
+def load_from_json(file):
+    '''slurp a json file into an object'''
+    with open(file, "r") as f:
+        return JSON.parse(f.readlines() )
+
+def write_to_json(obj, fname):
+    '''dump an object as json to a file'''
+    with open(fname, "w") as f:
+        JSON.write(obj)
