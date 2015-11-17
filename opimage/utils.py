@@ -68,15 +68,14 @@ def save_csv(data, colnames=[], fname='result.csv', sep=","):
 
 def box_to_string(tple):
     '''get corners of box as string'''
-    print tple
     return ":".join([str(tple[0].start), str(tple[0].stop) ,str(tple[1].start), str(tple[1].stop) ] )
 
-def load_from_json(file):
+def load_from_json(fname):
     '''slurp a json file into an object'''
-    with open(file, "r") as f:
-        return JSON.parse(f.readlines() )
+    with open(fname, "r") as f:
+        return json.loads(f.read() )
 
 def write_to_json(obj, fname):
     '''dump an object as json to a file'''
     with open(fname, "w") as f:
-        JSON.write(obj)
+        f.write(json.dumps(obj))
