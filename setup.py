@@ -9,7 +9,7 @@ setup(name='opimage',
       description='Open PI Image Library',
       long_description=readme(),
       classifiers=[
-        'Development Status :: 3 - Alpha' ,
+        'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.7',
         'Topic :: Image Processing :: Science',

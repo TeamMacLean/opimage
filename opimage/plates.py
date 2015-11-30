@@ -77,7 +77,7 @@ def get_growth_delta(list_of_bounding_boxes):
 
     '''
     result = [0.0]
-    for i in range(0,len(list_of_bounding_boxes)):
+    for i in range(0, len(list_of_bounding_boxes)):
         box_i = list_of_bounding_boxes[i]
         try:
             box_j = list_of_bounding_boxes[i + 1]
@@ -86,7 +86,7 @@ def get_growth_delta(list_of_bounding_boxes):
             pass
     return result
 
-def length_from_coords(x1,x2,y1,y2):
+def length_from_coords(x1, x2, y1, y2):
     return math.sqrt( (math.fabs(x1 - x2)**2 ) + (math.fabs(y1 - y2)**2) )
 
 def select_root(sub_image, selem_size=3):
