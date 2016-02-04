@@ -25,7 +25,8 @@ setup(name='opimage',
           'scipy',
           'scikit-image',
           'matplotlib',
-          'python-dateutil'
+          'python-dateutil',
+          'schedule'
       ],
       scripts=['opimage/scripts/get_seedlings.py'],
       test_suite='nose.collector',
